@@ -1,10 +1,38 @@
-To execute the assemble/link bash script, 
-add execute privilege for the script.
+This project is a simple assembly program.
 
-(While in same directory)
+Included Files: 
 
-    chmod +x asm64
+    example.asm     - assembly source code file
+    asm64           - bash script to assemble and link
+    example.o       - object file output
+    example.lst     - list file output 
+    runtests        - gdb script to output variables to log file
+    log.txt         - log file output from gdb
+    README          - this file
 
-Call script with 
+Project Take Aways:
 
-    ./asm64 example
+    1) Defines the source code structure
+    2) Simple assembly variables and arithmetic operations
+    3) Introduction to assembler and linker
+    4) Intro to ddd for visual and interactive debugging
+    5) Intro to gdb for automated testing and debugging
+
+Notes for asm64 script:
+
+    To execute the assemble/link bash script, 
+    add execute privilege for the script.
+
+    (While in same directory)
+
+        chmod +x asm64
+
+    Call script with to produce executable named example
+
+        ./asm64 example
+
+Notes for runtests script:
+
+    Use this bash command to execute script
+
+        gdb <runtests example
