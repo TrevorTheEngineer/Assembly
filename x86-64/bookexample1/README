@@ -1,0 +1,10 @@
+To execute the assemble/link bash script, 
+add execute privilege for the script.
+
+(While in same directory)
+
+    chmod +x asm64
+
+Call script with 
+
+    ./asm64 example
