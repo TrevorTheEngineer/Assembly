@@ -1,0 +1,82 @@
+#------------------------------------
+# Debugger Input Script
+#------------------------------------
+echo \n\n
+break inc
+break add
+break adc
+break sub
+break dec
+run
+set pagination off
+set logging file log.txt
+set logging overwrite
+set logging enabled on
+set prompt
+echo -Testing:---------------------------- \n
+echo inc | byVar1 = 10 \n
+x/db &byVar1
+echo \n
+continue
+echo add | al = 1 \n
+x/db &byResult
+echo \n
+continue
+echo adc | cl = 1 \n
+x/db &byResult
+echo \n
+continue
+echo sub | al = 0 \n
+x/db &byResult
+echo \n
+continue
+echo dec | cl = 0 \n
+x/db &byResult
+echo \n
+echo ------------------------------------ \n
+continue
+set logging enabled off
+continue
+
+
+# ----------------------------------------------------------------------------------------------
+# Command                                 Description
+# ----------------------------------------------------------------------------------------------
+# quit | q                                Quit the debugger.
+# break <label/addr> | b <label/addr>     Set a break point (stop point) at <label> or <address>.
+# run <args> | r <args>                   Execute the program (to the first breakpoint).
+# continue | c                            Continue execution (to the next breakpoint).
+# continue <n> | c <n>                    Continue execution (to the next breakpoint),
+#                                         skipping n-1 crossing of the breakpoint. This is
+#                                         can be used to quickly get to the nth iteration of
+#                                         a loop.
+# step | s                                Step into next instruction (i.e., steps into
+#                                         function/procedure calls).
+# next | n                                Next instruction (steps through function/procedure 
+#                                         calls).
+# F3                                      Re-start program (and stop at first breakpoint).
+#                                         where Current activation (call depth).
+# x/<n><f><u> $rsp                        Examine contents of the stack.
+# x/<n><f><u> &<variable>                 Examine memory location <variable>
+#                                         <n> number of locations to display, 1 is
+#                                         default.
+#                                         <f> format:
+#                                             d – decimal (signed)
+#                                             x – hex
+#                                             u – decimal (unsigned)
+#                                             c – character
+#                                             s – string
+#                                             f – floating-point
+#                                         <u> unit size: 
+#                                             b – byte (8-bits)
+#                                             h – halfword (16-bits)
+#                                             w – word (32-bits)
+#                                             g – giant (64-bits)
+# source <filename>                       Read commands from file <filename>.
+# set logging file <filename>
+# Set logging file to <filename>          , default is gdb.txt.
+# set logging on                          Turn logging (to a file) on.
+# set logging off                         Turn logging (to a file) off.
+# set logging overwrite                   When logging (to a file) is turned on, overwrite
+#                                         previous log file (if any).
+# ---------------------------------------------------------------------------------------------

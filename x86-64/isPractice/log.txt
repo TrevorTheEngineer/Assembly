@@ -1,0 +1,22 @@
+(gdb) -Testing:---------------------------- 
+inc | byVar1 = 10 
+0x402000:	9
+
+The program is not being run.
+add | al = 1 
+0x402019:	0
+
+The program is not being run.
+adc | cl = 1 
+0x402019:	0
+
+The program is not being run.
+sub | al = 0 
+0x402019:	0
+
+The program is not being run.
+dec | cl = 0 
+0x402019:	0
+
+------------------------------------ 
+The program is not being run.
