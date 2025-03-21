@@ -2,41 +2,54 @@
 # Debugger Input Script
 #------------------------------------
 echo \n\n
-break inc
-break add
-break adc
-break sub
-break dec
-run
+#break inc
+#break add
+#break adc
+#break sub
+#break dec
+#run
 set pagination off
-set logging file log.txt
+set logging file gdb_log.txt
 set logging overwrite
 set logging enabled on
-set prompt
+#set prompt 
 echo -Testing:---------------------------- \n
-echo inc | byVar1 = 10 \n
-x/db &byVar1
-echo \n
-continue
-echo add | al = 1 \n
-x/db &byResult
-echo \n
-continue
-echo adc | cl = 1 \n
-x/db &byResult
-echo \n
-continue
-echo sub | al = 0 \n
-x/db &byResult
-echo \n
-continue
-echo dec | cl = 0 \n
-x/db &byResult
-echo \n
+break inc
+    echo inc | byVar1 = 10 \n
+    x/db &byVar1
+    echo \n
+    continue
+end
+break add
+    echo add | al = 1 \n
+    x/db &byResult
+    echo \n
+    continue
+end
+break adc
+    echo adc | cl = 1 \n
+    x/db &byResult
+    echo \n
+    continue
+end
+break sub
+    echo sub | al = 0 \n
+    x/db &byResult
+    echo \n
+    continue
+end
+break dec
+    echo dec | cl = 0 \n
+    x/db &byResult
+    echo \n
+    continue
+end
+
+run
+
 echo ------------------------------------ \n
-continue
 set logging enabled off
-continue
+quit
 
 
 # ----------------------------------------------------------------------------------------------
