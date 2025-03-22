@@ -6,7 +6,7 @@ section .data                                   ; Define data section (variables
 
                                                 ; Define constants
     EXIT_SUCCESS    equ     0                   ; successful operation
-    SYS_EXIT        equ     60                  ; call code for terminate
+    SYS_exit        equ     60                  ; call code for terminate
 
                                                 ; Variable declarations
     bVar1           db      9                   ; byte      8-bits
@@ -46,7 +46,7 @@ section .text                                   ; Define text section (instructi
         inc     al                              ; al = 246
         inc     byte [bVar1]                    ; byVar1 = 10
 
-   add_Example:                                 ; add - addition
+    add_Example:                                ; add - addition
         add     al,     byte [bVar1]            ; al = 1 / rFlag = 1
         mov     byte [bResult],    al           ; store al in memory
  
@@ -73,7 +73,7 @@ section .text                                   ; Define text section (instructi
         imul    ax,     -10                     ; 500 x -10 = -5000 -> ax
         mov     word [wResult],     ax          ; save ax
 
-    div_Example:                                ; div - unsigned division (dividen/divisor -> quotient & remainder)
+    div_Example:                                ; div - unsigned division (dividend/divisor -> quotient & remainder)
         mov     dx,     0                       ; clear MSB word of double in dx
         mov     ax,     word [wVar2]            ; ax = 750
         mov     bx,     75                      ; bx = 75
@@ -88,8 +88,71 @@ section .text                                   ; Define text section (instructi
         mov     dword [dResult],    eax         ; store quotient
         mov     dword [dRemain],    edx         ; store remainder
 
+    shl_Example:                                ; shl - logical shift left
+        mov     al,     5                       ; set al to 5
+        shl     al,     2                       ; shift al left by 2 bits (unsigned multiply by 2^2)
+        mov     byte [bResult],     al          ; al = 20
+
+    shr_Example:                                ; shr - logical shift right
+        shr     al,     2                       ; shift al right by 2 bits (unsigned divide by 2^2)
+        mov     byte [bResult],     al          ; al = 5
+
+    sal_Example:                                ; sal - arithmetic shift left
+        sal     al,     2                       ; shift al left by 2 bits (fill zero)
+
+    sar_Example:                                ; sar - arithmetic shift right
+        sar     al,     2                       ; shift al right by 2 bits (copy sign bit)
+
+    rol_Example:                                ; rol = rotate left
+        rol     al,     5                       ; rotate al left by 5 bits
+    
+    ror_Example:                                ; ror - rotate right
+        ror     al,     5                       ; rotate al right by 5 bits
+
+    jmp_Example:                                ; jmp - unconditional jump
+        jmp     cmp_Example                     ; jump to next label
+
+    cmp_Example:                                ; cmp - comparison before conditional jump
+        cmp     al,     0                       ; compare al to 0
+    
+    je_Example:                                 ; je - jump
+        je      jumpEqual                       ; jump if equal
+    
+    jne_Example:                                ; jne - jump        
+        jne     jumpNotEqual                    ; jump if not equal
+    
+    jl_Example:                                 ; jl - jump   
+        jl      jumpLess                        ; signed jump if <
+    
+    jle_Example:                                ; jle - jump  
+        jle     jumpLessOrEqual                 ; signed jump if <=
+    
+    jg_Example:                                 ; jg - jump  
+        jg      jumpGreater                     ; signed jump if >
+    
+    jge_Example:                                ; jge - jump       
+        jge     jumpGreaterEqual                ; signed jump if >=
+    
+    jb_Example:                                 ; jb - jump  
+        jb      jumpBelow                       ; unsigned jump if <
+    
+    jbe_Example:                                ; jbe - jump  
+        jbe     jumpBelowEqual                  ; unsigned jump if <=
+    
+    ja_Example:                                 ; ja - jump  
+        ja      jumpAbove                       ; unsigned jump if >
+    
+    jae_Example:                                ; jae - jump  
+        jae     jumpAboveEqual                  ; unsigned jump if >=
+
+    loop_Example:                               ; loop - dec rcx, cmp rcx to 0, jne
+        mov     rax,    0                       ; set rax to 0
+        mov     rcx,    5                       ; set loop counter to 5
+        inc     rax                             ; increment rax to count loops
+        loop    rcx                             ; dec rcx, cmp rcx to 0, jne     
+
     last:
-        mov     rax,    SYS_EXIT                ; Call code for exit
+        mov     rax,    SYS_exit                ; Call code for exit
         mov     rdi,    EXIT_SUCCESS            ; Exit program with success
         syscall
 
